@@ -13,7 +13,7 @@ public class Ticket {
     private Double price;
 
     @Enumerated(EnumType.STRING)
-    private TicketStatus status = TicketStatus.PENDING;
+    final TicketStatus status = TicketStatus.PENDING;
 
     private String description;
     private LocalDateTime createdAt;
