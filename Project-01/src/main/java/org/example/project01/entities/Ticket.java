@@ -16,12 +16,14 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable=false)
     private Double price;
 
     @Enumerated(EnumType.STRING)
     final TicketStatus status = TicketStatus.PENDING;
 
     private String description;
+
     private Timestamp createdAt;
 
     @ManyToOne
