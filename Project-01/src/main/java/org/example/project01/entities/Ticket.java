@@ -1,9 +1,15 @@
 package org.example.project01.entities;
 
-import org.example.project01.enums.TicketStatus;
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.example.project01.enums.TicketStatus;
+import java.sql.Timestamp;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Entity
 public class Ticket {
     @Id
@@ -16,7 +22,7 @@ public class Ticket {
     final TicketStatus status = TicketStatus.PENDING;
 
     private String description;
-    private LocalDateTime createdAt;
+    private Timestamp createdAt;
 
     @ManyToOne
     private Employee createdBy;
