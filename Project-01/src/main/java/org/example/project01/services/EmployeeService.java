@@ -19,7 +19,11 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-//    public List<Employee> getAll() { return employeeRepository.findAll(); }
+    public Employee getById(Long id) {
+        return employeeRepository.getById(id);
+    }
+
+    public List<Employee> getAll() { return employeeRepository.findAll(); }
 
     public Employee login(String username, String password) throws PasswordFailedException {
         Employee employee = this.employeeRepository.findByUsername(username);
