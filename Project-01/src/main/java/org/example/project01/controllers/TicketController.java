@@ -15,9 +15,9 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
-    @PostMapping("/tickets")
+    @PostMapping("/ticket")
     public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
-        ticket = this.ticketService.insert(ticket);
+        ticket = this.ticketService.create(ticket);
         if (ticket != null) {
             return new ResponseEntity<>(ticket, HttpStatus.CREATED);
         }

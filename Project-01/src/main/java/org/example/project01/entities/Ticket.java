@@ -20,12 +20,12 @@ public class Ticket {
     private Double price;
 
     @Enumerated(EnumType.STRING)
-    final TicketStatus status = TicketStatus.PENDING;
+    private TicketStatus status = TicketStatus.PENDING;
 
     private String description;
 
     private Timestamp createdAt;
 
     @ManyToOne
-    private Employee createdBy;
+    private Employee createdById;
 }
