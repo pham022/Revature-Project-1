@@ -1,4 +1,9 @@
 package org.example.project01.repositories;
 
-public interface TicketRepository {
+import org.example.project01.entities.Ticket;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface TicketRepository extends JpaRepository<Ticket, Long> {
 }

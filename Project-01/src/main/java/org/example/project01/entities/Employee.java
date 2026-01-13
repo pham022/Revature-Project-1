@@ -1,11 +1,11 @@
 package org.example.project01.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,7 +16,14 @@ public class Employee {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(unique = true, nullable = false)
     private String username;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
+    private boolean isManager;
+    @OneToMany(targetEntity=Ticket.class, cascade=CascadeType.ALL)
+    @JoinColumn(name="ticket_fk", referencedColumnName = "id")
+    private List<Ticket> tickets;
 
 }
