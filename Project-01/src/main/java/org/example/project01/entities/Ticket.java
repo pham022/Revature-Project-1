@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Reference;
-
+import org.example.project01.enums.TicketStatus;
 import java.sql.Timestamp;
 
 @NoArgsConstructor
@@ -13,13 +12,18 @@ import java.sql.Timestamp;
 @Data
 @Entity
 public class Ticket {
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private double price;
-    private String status;
-    private String description;
-    private Timestamp created;
 
+    private Double price;
+
+    @Enumerated(EnumType.STRING)
+    final TicketStatus status = TicketStatus.PENDING;
+
+    private String description;
+    private Timestamp createdAt;
+
+    @ManyToOne
+    private Employee createdBy;
 }
