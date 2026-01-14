@@ -1,5 +1,6 @@
 package org.example.project01.controllers;
 
+import org.example.project01.dto.TicketDTO;
 import org.example.project01.entities.Ticket;
 import org.example.project01.services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,14 @@ public class TicketController {
     private TicketService ticketService;
 
     @PostMapping("/ticket")
-    public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
-        ticket = this.ticketService.create(ticket);
+    public ResponseEntity<TicketDTO> create(@RequestBody TicketDTO ticketDTO) {
+        Ticket ticket = ticketService.create(ticketDTO);
+        TicketDTO responseDTO = new TicketDTO(ticket);
         if (ticket != null) {
-            return new ResponseEntity<>(ticket, HttpStatus.CREATED);
+            return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
         }
         else {
-            return new ResponseEntity<>(new Ticket(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
         }
     }
 }

@@ -27,5 +27,6 @@ public class Ticket {
     private Timestamp createdAt;
 
     @ManyToOne
-    private Employee createdById;
+    @JoinColumn(name = "created_by_id")
+    private Employee createdBy;
 }
