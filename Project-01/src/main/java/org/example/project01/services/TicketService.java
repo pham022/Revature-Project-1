@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Service
 public class TicketService {
@@ -19,6 +20,14 @@ public class TicketService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    public Ticket getById(Long id) {
+        return ticketRepository.findById(id).orElse(null);
+    }
+
+    public List<Ticket> getAll() {
+        return ticketRepository.findAll();
+    }
 
     public Ticket create(CreateTicketRequest request) {
         Employee createdBy = employeeRepository.getById(request.getCreatedById());
