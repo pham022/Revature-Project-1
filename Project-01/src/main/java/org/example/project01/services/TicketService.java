@@ -22,12 +22,8 @@ public class TicketService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public Ticket getById(Long id) throws InvalidTicketIdException {
-        Ticket ticket = ticketRepository.findById(id).orElse(null);
-        if (ticket == null) {
-            throw new InvalidTicketIdException(id);
-        }
-        return ticket;
+    public Ticket getById(Long id) {
+        return ticketRepository.findById(id).orElse(null);
     }
 
     public List<Ticket> getAll() {

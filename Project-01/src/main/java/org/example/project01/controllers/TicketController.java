@@ -20,7 +20,7 @@ public class TicketController {
     private TicketService ticketService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<TicketDTO> getTicketById(@PathVariable Long id) throws InvalidTicketIdException {
+    public ResponseEntity<TicketDTO> getTicketById(@PathVariable Long id) {
         Ticket ticket = ticketService.getById(id);
 
         if (ticket != null) {
