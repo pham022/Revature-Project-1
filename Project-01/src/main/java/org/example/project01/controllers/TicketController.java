@@ -1,5 +1,6 @@
 package org.example.project01.controllers;
 
+import org.example.project01.dto.CreateTicketRequest;
 import org.example.project01.dto.TicketDTO;
 import org.example.project01.entities.Ticket;
 import org.example.project01.services.TicketService;
@@ -17,8 +18,8 @@ public class TicketController {
     private TicketService ticketService;
 
     @PostMapping("/ticket")
-    public ResponseEntity<TicketDTO> create(@RequestBody TicketDTO ticketDTO) {
-        Ticket ticket = ticketService.create(ticketDTO);
+    public ResponseEntity<TicketDTO> create(@RequestBody CreateTicketRequest request) {
+        Ticket ticket = ticketService.create(request);
         TicketDTO responseDTO = new TicketDTO(ticket);
         if (ticket != null) {
             return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
