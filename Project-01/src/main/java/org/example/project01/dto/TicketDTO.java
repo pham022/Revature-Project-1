@@ -15,7 +15,6 @@ public class TicketDTO {
     private String description;
     private TicketStatus status;
     private Timestamp createdAt;
-    private Long createdById;
 
     private EmployeeInfo createdBy;
 
