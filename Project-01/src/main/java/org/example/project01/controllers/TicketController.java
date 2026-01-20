@@ -4,7 +4,7 @@ import org.example.project01.dto.CreateTicketRequest;
 import org.example.project01.dto.TicketDTO;
 import org.example.project01.entities.Ticket;
 import org.example.project01.services.TicketService;
-import org.example.project01.exceptions.InvalidTicketIdException;
+import org.example.project01.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class TicketController {
     private TicketService ticketService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<TicketDTO> getTicketById(@PathVariable Long id) {
+    public ResponseEntity<TicketDTO> getTicketById(@PathVariable Long id) throws InvalidTicketIdException {
         Ticket ticket = ticketService.getById(id);
 
         if (ticket != null) {
