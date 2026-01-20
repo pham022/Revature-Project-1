@@ -1,11 +1,11 @@
 package org.example.project01.services;
 
 import org.example.project01.dto.CreateTicketRequest;
-import org.example.project01.dto.TicketDTO;
+import org.example.project01.dto.UpdateTicketRequest;
 import org.example.project01.entities.Ticket;
 import org.example.project01.entities.Employee;
 import org.example.project01.enums.TicketStatus;
-import org.example.project01.exceptions.InvalidTicketIdException;
+import org.example.project01.exceptions.*;
 import org.example.project01.repositories.TicketRepository;
 import org.example.project01.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +22,9 @@ public class TicketService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public Ticket getById(Long id) {
-        return ticketRepository.findById(id).orElse(null);
+    public Ticket getById(Long id) throws InvalidTicketIdException {
+        return ticketRepository.findById(id)
+                .orElseThrow(() -> new InvalidTicketIdException(id));
     }
 
     public List<Ticket> getAll() {
@@ -43,6 +44,27 @@ public class TicketService {
         return ticketRepository.save(ticket);
     }
 
+    public Ticket update(Long id, UpdateTicketRequest request) throws InvalidTicketIdException {
+        Ticket ticket = ticketRepository.findById(id).orElseThrow(() -> new InvalidTicketIdException(id));
 
+        // Update only non-null fields
+        if (request.getPrice() != null) {
+            ticket.setPrice(request.getPrice());
+        }
+        if (request.getDescription() != null) {
+            ticket.setDescription(request.getDescription());
+        }
+        if (request.getStatus() != null) {
+            ticket.setStatus(request.getStatus());
+        }
 
+        return ticketRepository.save(ticket);
+    }
+
+    public void delete(Long id) throws InvalidTicketIdException {
+        if (!ticketRepository.existsById(id)) {
+            throw new InvalidTicketIdException(id);
+        }
+        ticketRepository.deleteById(id);
+    }
 }
