@@ -61,11 +61,10 @@ public class TicketService {
         return ticketRepository.save(ticket);
     }
 
-    public boolean delete(Long id) throws InvalidTicketIdException {
+    public void delete(Long id) throws InvalidTicketIdException {
         if (!ticketRepository.existsById(id)) {
             throw new InvalidTicketIdException(id);
         }
         ticketRepository.deleteById(id);
-        return true;
     }
 }
