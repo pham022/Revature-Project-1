@@ -5,6 +5,7 @@ import org.example.project01.dto.TicketDTO;
 import org.example.project01.entities.Ticket;
 import org.example.project01.entities.Employee;
 import org.example.project01.enums.TicketStatus;
+import org.example.project01.exceptions.InvalidTicketIdException;
 import org.example.project01.repositories.TicketRepository;
 import org.example.project01.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
