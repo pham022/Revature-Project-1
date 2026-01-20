@@ -4,7 +4,6 @@ import org.example.project01.dto.CreateTicketRequest;
 import org.example.project01.dto.TicketDTO;
 import org.example.project01.entities.Ticket;
 import org.example.project01.services.TicketService;
-import org.example.project01.exceptions.InvalidTicketIdException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
