@@ -1,14 +1,19 @@
 import React from 'react';
+import logo from './logo.svg';
 import './App.css';
-import LoginForm from './components/auth/LoginForm';
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/NavBar';
+import Login from './components/auth/Login';
 
 function App() {
   return (
-    <div>
-      <h1>Welcome Page</h1>
-      <LoginForm/>
-    </div>
+    <BrowserRouter>
+    <Navbar/>
+    <Routes>
+      <Route path="/login" element={<Login/>}/>
+    </Routes>
+    
+    </BrowserRouter>
   );
 }
 
