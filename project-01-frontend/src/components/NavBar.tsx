@@ -3,7 +3,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import styles from './Navbar.module.css';
 import { useAuth } from './auth/useAuth';
 
-export default function Navbar() {
+interface NavbarProps {
+    username?: string;
+}
+
+export default function Navbar({ username }: NavbarProps) {
 
     const navigate = useNavigate();
 
@@ -14,19 +18,33 @@ export default function Navbar() {
         navigate('/');
     }
 
+    const handleLogout = () => {
+        // Add logout logic here
+        navigate('/login')
+    }
+
     return (
-        <nav className = {styles.navBar}>
-        <Link className = {styles.navItem} to = "/">Home</Link>
-        {user 
-        ? 
-        <button onClick={logoutHandler} className = {styles.navRed}>Log Out</button>
-        :
-        <Link className = {styles.navItem} to = "/login">Log In</Link>
-        }
-        <Link className = {styles.navItem} to = "/register">Register</Link>
-        <Link className = {styles.navItem} to = "/employees">Employees</Link>
-        <Link className = {styles.navItem} to = "/tickets">Tickets</Link>
-        </nav>
+        <header className={styles.header}>
+            <h1>Expense Reimbursement Management System</h1>
+            <div className={styles.headerRight}>
+                <span>Welcome, {username}</span>
+                <button className={styles.logoutBtn} onClick={handleLogout}>
+                    Logout
+                </button>
+            </div>
+        </header>
+        // <nav className = {styles.navBar}>
+        // <Link className = {styles.navItem} to = "/">Home</Link>
+        // {user 
+        // ? 
+        // <button onClick={logoutHandler} className = {styles.navRed}>Log Out</button>
+        // :
+        // <Link className = {styles.navItem} to = "/login">Log In</Link>
+        // }
+        // <Link className = {styles.navItem} to = "/register">Register</Link>
+        // <Link className = {styles.navItem} to = "/employees">Employees</Link>
+        // <Link className = {styles.navItem} to = "/tickets">Tickets</Link>
+        // </nav>
     )
 
 }
