@@ -19,9 +19,9 @@ export default function Tickets() {
             .catch(error => console.error(error));
     }, [])
 
-    const ticketClickHandler = (id: number) => {
-        navigate(`/tickets/${id}`)
-    }
+    // const ticketClickHandler = (id: number) => {
+    //     navigate(`/tickets/${id}`)
+    // }
 
     const handleSubmitTicket = () => {
         navigate('/tickets/new')
@@ -115,9 +115,9 @@ export default function Tickets() {
                                     <td className={styles.actionsCell}>
                                         <button 
                                             className={styles.actionBtn}
-                                            onClick={() => ticketClickHandler(ticket.id)}
+                                            onClick={() => navigate(`/tickets/${ticket.id}`)} 
                                         >
-                                            View
+                                            Edit
                                         </button>
                                     </td>
                                 </tr>
