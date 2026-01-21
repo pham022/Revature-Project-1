@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .navBar {
   margin: auto;
   border: solid;
@@ -26,4 +27,41 @@
 .navItem:hover {
   color: white;
   background: black;
+=======
+/* Page Header */
+.header {
+  background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.headerRight {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+/* Logout Button */
+.logoutBtn {
+  padding: 8px 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logoutBtn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+>>>>>>> d4af8a141527fb8e338c953018639ba839afe1c0
 }

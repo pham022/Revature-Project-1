@@ -2,6 +2,7 @@ package org.example.project01.controllers;
 
 import org.example.project01.dto.CreateTicketRequest;
 import org.example.project01.dto.TicketDTO;
+import org.example.project01.dto.UpdateTicketRequest;
 import org.example.project01.entities.Ticket;
 import org.example.project01.services.TicketService;
 import org.example.project01.exceptions.*;
@@ -22,13 +23,8 @@ public class TicketController {
     @GetMapping("/{id}")
     public ResponseEntity<TicketDTO> getTicketById(@PathVariable Long id) throws InvalidTicketIdException {
         Ticket ticket = ticketService.getById(id);
-
-        if (ticket != null) {
-            TicketDTO responseDTO = new TicketDTO(ticket);
-            return ResponseEntity.ok(responseDTO);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        TicketDTO responseDTO = new TicketDTO(ticket);
+        return ResponseEntity.ok(responseDTO);
     }
 
     @GetMapping
@@ -44,11 +40,19 @@ public class TicketController {
     public ResponseEntity<TicketDTO> create(@RequestBody CreateTicketRequest request) {
         Ticket ticket = ticketService.create(request);
         TicketDTO responseDTO = new TicketDTO(ticket);
-        if (ticket != null) {
-            return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
-        }
-        else {
-            return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
-        }
+        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TicketDTO> update(@PathVariable Long id, @RequestBody UpdateTicketRequest request) throws InvalidTicketIdException {
+        Ticket ticket = ticketService.update(id, request);
+        TicketDTO responseDTO = new TicketDTO(ticket);
+        return ResponseEntity.ok(responseDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) throws InvalidTicketIdException {
+        ticketService.delete(id);
+        return new ResponseEntity<>("Ticket was deleted!", HttpStatus.OK);
     }
 }
