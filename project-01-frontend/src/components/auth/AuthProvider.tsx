@@ -17,7 +17,7 @@ export default function AuthProvider({children}: {children : React.ReactNode}) {
         try {
             let response = await axios.post(`${base_url}/login`, {username, password});
             setUser(response.data);
-            navigate('/');
+            navigate('/employees');
         } catch(error) {
             console.error(error);
             alert("Login attempt failed!");
