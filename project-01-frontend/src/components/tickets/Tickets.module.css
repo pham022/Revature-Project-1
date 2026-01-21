@@ -1,0 +1,215 @@
+.dashboard {
+  padding: 32px;
+  background: #f9fafb;
+  min-height: 100vh;
+}
+
+.dashboardTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #111827;
+}
+
+.filterBar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filters {
+  display: flex;
+  gap: 12px;
+}
+
+.filterBtn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterBtn.active {
+  background-color: #2563eb;
+  color: white;
+}
+
+.filterBtn.inactive {
+  background-color: #6b7280;
+  color: white;
+}
+
+.filterBtn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.submitBtn {
+  padding: 12px 28px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submitBtn:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.successMessage {
+  color: #10b981;
+  font-weight: 500;
+  margin-bottom: 20px;
+  padding: 12px;
+  background: #d1fae5;
+  border-radius: 8px;
+  border-left: 4px solid #10b981;
+}
+
+/* Table Wrapper */
+.wrapper {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead {
+  background: white;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.table th {
+  padding: 16px 20px;
+  text-align: left;
+  font-weight: 600;
+  color: #111827;
+  font-size: 0.95rem;
+}
+
+/* Column widths */
+.table th:nth-child(1) { /* ID */
+  width: 80px;
+}
+
+.table th:nth-child(2) { /* Amount */
+  width: 140px;
+}
+
+.table th:nth-child(3) { /* Description */
+  width: auto;
+}
+
+.table th:nth-child(4) { /* Status */
+  width: 140px;
+}
+
+.table th:nth-child(5) { /* Created */
+  width: 140px;
+}
+
+.table th:nth-child(6) { /* Actions */
+  width: 120px;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid #f3f4f6;
+  transition: background-color 0.15s;
+}
+
+.table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.table td {
+  padding: 20px;
+  color: #374151;
+  font-size: 0.95rem;
+}
+
+.idCell {
+  font-weight: 500;
+  color: #111827;
+}
+
+.amountCell {
+  font-weight: 500;
+  color: #111827;
+}
+
+.descriptionCell {
+  color: #6b7280;
+}
+
+.statusCell {
+  padding: 20px;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statusBadge.pending {
+  background-color: #fbbf24;
+  color: #78350f;
+}
+
+.statusBadge.approved {
+  background-color: #10b981;
+  color: white;
+}
+
+.statusBadge.rejected {
+  background-color: #ef4444;
+  color: white;
+}
+
+.createdAtCell {
+  color: #111827;
+}
+
+/* Actions Column */
+.actionsCell {
+  padding: 20px;
+}
+
+.actionBtn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 2px solid #e5e7eb;
+  background-color: white;
+  color: #374151;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.actionBtn:hover {
+  background-color: #111827;
+  color: white;
+  border-color: #111827;
+}
