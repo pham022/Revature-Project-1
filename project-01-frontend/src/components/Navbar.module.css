@@ -1,29 +1,36 @@
-.navBar {
-  margin: auto;
-  border: solid;
-  margin-bottom: 20px;
-  padding: 10px;
-  border-width: 1px;
-  background: white;
-}
-
-.navItem {
-  margin-right: 40px;
-  text-decoration: none;
-  color: black;
-  border: solid;
-  padding: 5px;
-  border-radius: 5px;
-  border-width: 1px;
-  border-width: 1px;
-  background: white;
-  font-size: 16px;
-  cursor: pointer;
-
-
-}
-
-.navItem:hover {
+/* Page Header */
+.header {
+  background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: white;
-  background: black;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.headerRight {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+/* Logout Button */
+.logoutBtn {
+  padding: 8px 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logoutBtn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
