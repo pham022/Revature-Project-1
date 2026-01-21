@@ -12,19 +12,20 @@ export default function Navbar({ username }: NavbarProps) {
     // const {logout, user} = useAuth();
 
     const handleLogout = () => {
-        // Add logout logic here
+        logout();
         navigate('/login')
     }
+
+    const {logout, user} = useAuth();
 
     return (
         <header className={styles.header}>
             <h1>Expense Reimbursement Management System</h1>
             <div className={styles.headerRight}>
-                <span>Welcome, {username}</span>
-                {/* { user ?  */}
-                <button className={styles.logoutBtn} onClick={handleLogout}>Log Out</button>
-                {/* // :
-                // <Link to = "/login">Log In</Link>} */}
+                {user ? (
+                <><span>Welcome, {user.username}</span><button className={styles.logoutBtn} onClick={handleLogout}>Log Out</button></>)
+                :
+                (<span>Please log in.</span>)}
             </div>
         </header>
     )
