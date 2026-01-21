@@ -11,6 +11,9 @@ export default function AuthProvider({children}: {children : React.ReactNode}) {
     const [user, setUser] = useState<Employee | null> (null);
 
     const login = async (username:string, password:string) => {
+
+        console.log("username: " + username);
+        console.log("passowrd: " + password);
         try {
             let response = await axios.post(`${base_url}/login`, {username, password});
             setUser(response.data);

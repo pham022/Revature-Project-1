@@ -22,18 +22,18 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <form onSubmit = {onSubmitHandler}>
-        <div>
-          <label>Username</label>
-          <input id = "username" value = {loginFormData.username} onChange = {onChangeHandler} name = 'username'/>
+    <div className={styles.wrapper}>
+      <form className={styles.form} onSubmit = {onSubmitHandler}>
+        <div className={styles.field}>
+          <label className={styles.label}>Username</label>
+          <input className={styles.input} id = "username" value = {loginFormData.username} onChange = {onChangeHandler} name = 'username'/>
+        </div>
+        <div className={styles.field}>
+          <label className={styles.label}>Password</label>
+          <input className={styles.input} id = "password" value = {loginFormData.password} onChange = {onChangeHandler} name = 'password'/>
         </div>
         <div>
-          <label>Password</label>
-          <input id = "password" value = {loginFormData.password} onChange = {onChangeHandler} name = 'password'/>
-        </div>
-        <div>
-          <button type='submit'>Log In</button>
+          <button className={styles.button} type='submit'>Log In</button>
         </div>
       </form>
     </div>

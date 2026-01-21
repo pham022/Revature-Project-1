@@ -47,9 +47,6 @@ public class TicketService {
     public Ticket update(Long id, UpdateTicketRequest request) throws InvalidTicketIdException {
         Ticket ticket = ticketRepository.findById(id).orElseThrow(() -> new InvalidTicketIdException(id));
 
-<<<<<<< HEAD
-
-=======
         // Update only non-null fields
         if (request.getPrice() != null) {
             ticket.setPrice(request.getPrice());
@@ -70,5 +67,4 @@ public class TicketService {
         }
         ticketRepository.deleteById(id);
     }
->>>>>>> d4af8a141527fb8e338c953018639ba839afe1c0
 }
