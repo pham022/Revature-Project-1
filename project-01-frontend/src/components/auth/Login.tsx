@@ -2,6 +2,7 @@ import React, { ChangeEventHandler, useState, useContext } from 'react'
 import { AuthContext, Employee, LoginFormData } from '../../types/Employee';
 import styles from './../Item.module.css';
 import { useAuth } from './useAuth';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
   const [loginFormData, setLoginFormData] = useState<LoginFormData>({ username: '', password: '' });
@@ -32,8 +33,11 @@ export default function Login() {
           <label className={styles.label}>Password</label>
           <input className={styles.input} id = "password" value = {loginFormData.password} onChange = {onChangeHandler} name = 'password'/>
         </div>
-        <div>
+        <div className={styles.field}>
           <button className={styles.button} type='submit'>Log In</button>
+        </div>
+        <div className={styles.field}>
+          <Link to='/register'>Register an Account Here</Link>
         </div>
       </form>
     </div>
