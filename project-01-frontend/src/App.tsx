@@ -13,7 +13,7 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/employees" element={<Tickets/>} />
+        <Route path="/employee" element={<Tickets/>} />
         <Route path="/tickets/:id" element={<TicketItem/>} />
       </Routes>
       </AuthProvider>

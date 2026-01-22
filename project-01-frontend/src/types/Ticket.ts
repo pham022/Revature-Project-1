@@ -4,9 +4,21 @@ export interface Ticket {
     id: number;
     price: number;
     description: string;
-    status: 'PENDING' | 'APPROVED' | 'DENIED';
+    status: TicketStatus;
     createdAt: string;
-    // createdBy: Employee;
+    createdBy: Employee;
+}
+
+export interface CreateTicketRequest {
+    price: number;
+    description: string;
+    createdById: number;
+}
+
+export interface UpdateTicketRequest {
+    price?: number;
+    description?: string;
+    status?: TicketStatus; // for manager only
 }
 
 export interface TicketFormData {
