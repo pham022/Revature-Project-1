@@ -12,8 +12,6 @@ export default function AuthProvider({children}: {children : React.ReactNode}) {
 
     const login = async (username:string, password:string) => {
 
-        console.log("username: " + username);
-        console.log("passowrd: " + password);
         try {
             let response = await axios.post(`${base_url}/login`, {username, password});
             setUser(response.data);
@@ -24,14 +22,28 @@ export default function AuthProvider({children}: {children : React.ReactNode}) {
         }
     }
 
+    const register = async (username:string, password:string, isManager:boolean) => {
+
+        try {
+            let response = await axios.post(`${base_url}/register`, {username, password, isManager});
+            setUser(response.data);
+            navigate('/employees');
+        } catch(error) {
+            console.error(error);
+            alert("Registration attempt failed!");
+        }
+    }
+
     const logout = () => {
         setUser(null);
+        navigate('/login');
     }
 
     const value: AuthContextValue = {
         user,
         login,
-        logout
+        logout,
+        register
     }
 
     return (
