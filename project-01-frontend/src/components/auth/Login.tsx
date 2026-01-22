@@ -2,70 +2,54 @@ import React, { ChangeEventHandler, useState, useContext } from 'react'
 import { AuthContext, Employee, LoginFormData } from '../../types/Employee';
 import styles from './../Item.module.css';
 import { useAuth } from './useAuth';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
-  const [userFormData, setUserFormData] = useState<LoginFormData>({ username: 'username', password: 'password' });
+  const [loginFormData, setLoginFormData] = useState<LoginFormData>({ username: '', password: '' });
 
-  // retrieve login function from our custom hook:
   const {login} = useAuth();
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-
-    setUserFormData({
-      ...userFormData,
+    setLoginFormData({
+      ...loginFormData,
       [event.target.name]: event.target.value
     })
   }
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (userFormData.password) login(userFormData.username, userFormData.password);
-
+    console.log(loginFormData);
+    login(loginFormData.username, loginFormData.password);
   }
 
-
+  function showHide() {
+    var x = document.getElementById("password") as HTMLInputElement;
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
 
   return (
     <div className={styles.wrapper}>
-      <form className={styles.form} onSubmit={onSubmitHandler}>
+      <form className={styles.form} onSubmit = {onSubmitHandler}>
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="username">
-            Username
-          </label>
-          <input
-            id="username"
-            className={styles.input}
-            name="username"
-            value={userFormData.username}
-            onChange={onChangeHandler}
-          />
+          <label className={styles.label}>Username</label>
+          <input className={styles.button} id = "username" value = {loginFormData.username} onChange = {onChangeHandler} name = 'username'/>
         </div>
-
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="password">
-            Password
-          </label>
-          <input
-            id="password"
-            className={styles.input}
-            type="password"
-            name="password"
-            value={userFormData.password}
-            onChange={onChangeHandler}
-          />
+          <label className={styles.label}>Password</label>
+          <input className={styles.button} type="password" id="password" value={loginFormData.password} onChange={onChangeHandler} name='password'/>
+          <button className={styles.button} type="button" onClick={showHide}>Show/Hide Password</button>
         </div>
-
-        <div className={styles.actions}>
-          <button
-            type="submit"
-            className={`${styles.button} ${styles.primary}`}
-          >
-            Log In
-          </button>
-
+        <div className={styles.field}>
+          <button className={styles.button} type='submit'>Log In</button>
+        </div>
+        <div className={styles.field}>
+          <Link to='/register'><center>Register a new Employee Account here</center></Link>
         </div>
       </form>
-
     </div>
 
   )

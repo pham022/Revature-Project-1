@@ -31,6 +31,7 @@
   transition: all 0.2s;
 }
 
-.logoutBtn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+.navItem:hover {
+  color: white;
+  background: black;
 }
