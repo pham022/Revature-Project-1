@@ -2,7 +2,8 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/NavBar';
 import Login from './components/auth/Login';
-import Tickets from './components/tickets/Ticket';
+import Tickets from './components/tickets/Tickets';
+import TicketItem from './components/tickets/TicketItem';
 import AuthProvider from './components/auth/AuthProvider';
 import Register from './components/auth/Register';
 
@@ -14,8 +15,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Login/>}/>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/employees" element={<Tickets/>}/>
         <Route path="/register" element={<Register/>}/>
+        <Route path="/employee" element={<Tickets/>} />
+        <Route path="/tickets/:id" element={<TicketItem/>} />
       </Routes>
       </AuthProvider>
     </BrowserRouter>

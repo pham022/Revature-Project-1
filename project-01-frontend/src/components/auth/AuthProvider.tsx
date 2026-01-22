@@ -8,14 +8,22 @@ export default function AuthProvider({children}: {children : React.ReactNode}) {
 
     const navigate = useNavigate();
 
-    const [user, setUser] = useState<Employee | null> (null);
+    const [user, setUser] = useState<Employee | null>(() => {
+        const savedUser = localStorage.getItem('user');
+        return savedUser ? JSON.parse(savedUser) : null;
+    });
 
     const login = async (username:string, password:string) => {
 
         try {
             let response = await axios.post(`${base_url}/login`, {username, password});
             setUser(response.data);
+<<<<<<< HEAD
             navigate('/employees');
+=======
+            localStorage.setItem('user', JSON.stringify(response.data));
+            navigate('/employee');
+>>>>>>> 2617b9cd5ebd58518689d855ea6eee2707362f40
         } catch(error) {
             console.error(error);
             alert("Login attempt failed!");
@@ -36,7 +44,11 @@ export default function AuthProvider({children}: {children : React.ReactNode}) {
 
     const logout = () => {
         setUser(null);
+<<<<<<< HEAD
         navigate('/login');
+=======
+        localStorage.removeItem('user');
+>>>>>>> 2617b9cd5ebd58518689d855ea6eee2707362f40
     }
 
     const value: AuthContextValue = {
