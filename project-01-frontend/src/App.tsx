@@ -5,6 +5,7 @@ import Login from './components/auth/Login';
 import Tickets from './components/tickets/Tickets';
 import TicketItem from './components/tickets/TicketItem';
 import AuthProvider from './components/auth/AuthProvider';
+import Register from './components/auth/Register';
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
     <AuthProvider>
       <Navbar/>
       <Routes>
+        <Route path="/" element={<Login/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
         <Route path="/employee" element={<Tickets/>} />
         <Route path="/tickets/:id" element={<TicketItem/>} />
       </Routes>
