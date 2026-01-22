@@ -18,6 +18,15 @@ export default function EmployeeItem() {
         .catch(error => console.error(error))
     }, [id])
 
+    const onRegisterHandler = (event:React.ChangeEvent<HTMLInputElement>) => {
+        axios.put(`${base_url}/register`, employee)
+        .then(response => {
+            alert("Employee successfully registered.");
+            navigate('/login')
+        })
+        .catch(error => console.error(error));
+    }
+
     const onChangeHandler = (event:React.ChangeEvent<HTMLInputElement>) => {
         if(!employee) return;
         setEmployee({
