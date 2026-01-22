@@ -18,9 +18,14 @@ export default function AuthProvider({children}: {children : React.ReactNode}) {
         try {
             let response = await axios.post(`${base_url}/login`, {username, password});
             setUser(response.data);
+<<<<<<< HEAD
             // localStorage.setItem('user', JSON.stringify(response.data));
             navigate('/employee');
 
+=======
+            localStorage.setItem('user', JSON.stringify(response.data));
+            navigate('/employee');
+>>>>>>> 0e4419ffd7ab7b0fd82c964e5f97c071b6a75464
         } catch(error) {
             console.error(error);
             alert("Login attempt failed!");
