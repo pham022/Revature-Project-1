@@ -32,7 +32,11 @@ export default function AuthProvider({children}: {children : React.ReactNode}) {
         try {
             let response = await axios.post(`${base_url}/register`, {username, password, isManager});
             setUser(response.data);
+<<<<<<< HEAD
             navigate('/employee');
+=======
+            navigate('/employees');
+>>>>>>> 4a990233a13fee2a2c0594e3abcfee2dc58805ad
         } catch(error) {
             console.error(error);
             alert("Registration attempt failed!");
