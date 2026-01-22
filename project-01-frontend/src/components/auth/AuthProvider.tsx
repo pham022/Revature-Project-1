@@ -17,9 +17,17 @@ export default function AuthProvider({children}: {children : React.ReactNode}) {
 
         try {
             let response = await axios.post(`${base_url}/login`, {username, password});
-            setUser(response.data);
-            localStorage.setItem('user', JSON.stringify(response.data));
-            navigate('/employee');
+            const userData = response.data;
+            // Backend may send isManager or manager (Jackson booleans)
+            const isManager = userData.isManager === true || userData.manager === true;
+            const normalized = { ...userData, isManager };
+            setUser(normalized);
+            localStorage.setItem('user', JSON.stringify(normalized));
+            if (isManager) {
+                navigate('/manager');
+            } else {
+                navigate('/employee');
+            }
         } catch(error) {
             console.error(error);
             alert("Login attempt failed!");
@@ -30,10 +38,11 @@ export default function AuthProvider({children}: {children : React.ReactNode}) {
 
         try {
             let response = await axios.post(`${base_url}/register`, {username, password, isManager});
-            setUser(response.data);
-            localStorage.setItem('user', JSON.stringify(response.data));
-            // Navigate based on whether user is a manager
-            if (response.data.isManager) {
+            const userData = response.data;
+            const normalized = { ...userData, isManager };
+            setUser(normalized);
+            localStorage.setItem('user', JSON.stringify(normalized));
+            if (isManager) {
                 navigate('/manager');
             } else {
                 navigate('/employee');
