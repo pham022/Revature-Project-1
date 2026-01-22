@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class CreateTicketRequest {
     // body request format to send to endpoint
-    private Double price;
-    private String description;
+    @lombok.NonNull private Double price;
+    @lombok.NonNull private String description;
     private Long createdById;
 }

@@ -43,7 +43,17 @@ export default function TicketItem() {
     const onCreateHandler = () => {
         if (!ticket) return;
 
-        console.log('Current user:', ctx?.user);
+        
+        if (!ticket.description || ticket.description.trim() === '') {
+            alert('Description is required');
+            return;
+        }
+        
+        if (ticket.price <= 0) {
+            alert('Amount must be greater than $0');
+            return;
+        }
+
         if (!ctx?.user?.id) {
             navigate('/login');
             return;
