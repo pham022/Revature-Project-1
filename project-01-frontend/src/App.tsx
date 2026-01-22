@@ -15,14 +15,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Login/>}/>
         <Route path="/login" element={<Login/>}/>
-<<<<<<< HEAD
-        <Route path="/employees" element={<Tickets/>}/>
-        <Route path="/register" element={<Register/>}/>
-=======
         <Route path="/register" element={<Register/>}/>
         <Route path="/employee" element={<Tickets/>} />
         <Route path="/tickets/:id" element={<TicketItem/>} />
->>>>>>> 4a990233a13fee2a2c0594e3abcfee2dc58805ad
       </Routes>
       </AuthProvider>
     </BrowserRouter>

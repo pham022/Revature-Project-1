@@ -22,8 +22,8 @@ public class Employee {
     private String password;
     @Column(nullable = false)
     private boolean isManager;
-    @OneToMany(targetEntity=Ticket.class, cascade=CascadeType.ALL)
-    @JoinColumn(name="ticket_fk", referencedColumnName = "id")
-    private List<Ticket> tickets;
+//    @OneToMany(targetEntity=Ticket.class, cascade=CascadeType.ALL)
+//    @JoinColumn(name="ticket_fk", referencedColumnName = "id")
+//    private List<Ticket> tickets;
 
 }
