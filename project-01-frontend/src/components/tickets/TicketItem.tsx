@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Ticket } from '../../types/Ticket';
+import { CreateTicketRequest, Ticket } from '../../types/Ticket';
 import axios from 'axios';
 import base_url from '../../util/url';
 import styles from '../Item.module.css';
+import { AuthContext, Employee } from '../../types/Employee';
 
 export default function TicketItem() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const ctx = useContext(AuthContext);
     const [ticket, setTicket] = useState<Ticket | null>(null);
     const [isCreate, setIsCreate] = useState(false);
 
@@ -18,8 +20,8 @@ export default function TicketItem() {
                 id: 0,
                 description: '',
                 price: 0,
-                status: 'PENDING',
-                // createdBy: ,
+                status: "PENDING",
+                createdBy: {} as Employee,
                 createdAt: new Date().toISOString()
             });
         } else {
@@ -41,12 +43,27 @@ export default function TicketItem() {
     const onCreateHandler = () => {
         if (!ticket) return;
 
-        axios.post(`${base_url}/tickets`, ticket)
+        console.log('Current user:', ctx?.user);
+        if (!ctx?.user?.id) {
+            navigate('/login');
+            return;
+        }
+
+        const requestBody: CreateTicketRequest = {
+            price: ticket.price,
+            description: ticket.description,
+            createdById: ctx.user.id
+        }
+
+        axios.post(`${base_url}/tickets`, requestBody)
             .then(response => {
                 alert('Ticket created successfully!');
                 navigate('/employee');
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error('Error creating ticket:', error);
+                alert('Failed to create ticket');
+            });
     };
 
     const onUpdateHandler = () => {
@@ -60,7 +77,10 @@ export default function TicketItem() {
                 alert('Ticket updated successfully!');
                 navigate('/employee');
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error('Error updating ticket:', error);
+                alert('Failed to update ticket');
+            });
     };
 
     const onDeleteHandler = () => {
@@ -75,7 +95,10 @@ export default function TicketItem() {
                     alert('Ticket deleted!');
                     navigate('/employee');
                 })
-                .catch(error => console.error(error));
+                .catch(error => {
+                    console.error('Error deleting ticket:', error);
+                    alert('Failed to delete ticket');
+                });
         }
     };
 
