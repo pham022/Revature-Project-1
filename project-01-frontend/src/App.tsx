@@ -6,6 +6,7 @@ import Tickets from './components/tickets/Tickets';
 import TicketItem from './components/tickets/TicketItem';
 import AuthProvider from './components/auth/AuthProvider';
 import Register from './components/auth/Register';
+import ManagerDashboard from './components/ManagerDashboard';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/employee" element={<Tickets/>} />
+        <Route path="/manager" element={<ManagerDashboard/>} />
         <Route path="/tickets/:id" element={<TicketItem/>} />
       </Routes>
       </AuthProvider>
