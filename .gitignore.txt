@@ -1,0 +1,8 @@
+# Properties files
+*.properties
+
+# Resource folder
+Project-01\src\main\resources/
+
+# VS Code
+.vscode/

@@ -18,14 +18,8 @@ export default function AuthProvider({children}: {children : React.ReactNode}) {
         try {
             let response = await axios.post(`${base_url}/login`, {username, password});
             setUser(response.data);
-<<<<<<< HEAD
-            // localStorage.setItem('user', JSON.stringify(response.data));
             navigate('/employee');
 
-=======
-            localStorage.setItem('user', JSON.stringify(response.data));
-            navigate('/employee');
->>>>>>> 0e4419ffd7ab7b0fd82c964e5f97c071b6a75464
         } catch(error) {
             console.error(error);
             alert("Login attempt failed!");
@@ -37,11 +31,13 @@ export default function AuthProvider({children}: {children : React.ReactNode}) {
         try {
             let response = await axios.post(`${base_url}/register`, {username, password, isManager});
             setUser(response.data);
-<<<<<<< HEAD
-            navigate('/employee');
-=======
-            navigate('/employees');
->>>>>>> 4a990233a13fee2a2c0594e3abcfee2dc58805ad
+            localStorage.setItem('user', JSON.stringify(response.data));
+            // Navigate based on whether user is a manager
+            if (response.data.isManager) {
+                navigate('/manager');
+            } else {
+                navigate('/employee');
+            }
         } catch(error) {
             console.error(error);
             alert("Registration attempt failed!");

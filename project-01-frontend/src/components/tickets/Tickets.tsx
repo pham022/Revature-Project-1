@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import base_url from "../../util/url";
 import styles from "./Tickets.module.css"
+import { useAuth } from "../auth/useAuth";
 
 
 export default function Tickets() {
     const navigate = useNavigate();
+    const { user } = useAuth();
 
     const [tickets, setTicket] = useState<Ticket[]>([])
     const [filter, setFilter] = useState<'all' | 'pending' | 'date'>('all')
@@ -15,9 +17,14 @@ export default function Tickets() {
 
     useEffect(() => {
         axios.get(`${base_url}/tickets`)
-            .then(response => setTicket(response.data))
+            .then(response => {
+                const employeeTickets = response.data.filter(
+                    (ticket: Ticket) => ticket.createdBy.id === user?.id
+                );
+                setTicket(employeeTickets);
+            })
             .catch(error => console.error(error));
-    }, [])
+    }, [user?.id])
 
     const ticketClickHandler = (id: number) => {
         navigate(`/tickets/${id}`)
