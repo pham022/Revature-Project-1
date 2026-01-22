@@ -68,4 +68,8 @@ export default function Register() {
         </div>
     )
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 4a990233a13fee2a2c0594e3abcfee2dc58805ad
