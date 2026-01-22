@@ -11,7 +11,6 @@ export default function Tickets() {
 
     const [tickets, setTicket] = useState<Ticket[]>([])
     const [filter, setFilter] = useState<'all' | 'pending' | 'date'>('all')
-    const [showSuccess, setShowSuccess] = useState(false)
 
     useEffect(() => {
         axios.get(`${base_url}/tickets`)
@@ -74,12 +73,6 @@ export default function Tickets() {
                     </button>
                 </div>
 
-                {/* Success Message */}
-                {showSuccess && (
-                    <div className={styles.successMessage}>
-                        Ticket submitted successfully!
-                    </div>
-                )}
 
                 {/* Table */}
                 <div className={styles.wrapper}>

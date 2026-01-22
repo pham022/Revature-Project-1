@@ -18,7 +18,7 @@ export default function AuthProvider({children}: {children : React.ReactNode}) {
         try {
             let response = await axios.post(`${base_url}/login`, {username, password});
             const userData = response.data;
-            // Backend may send isManager or manager (Jackson booleans)
+            // Backend may send isManager or manager
             const isManager = userData.isManager === true || userData.manager === true;
             const normalized = { ...userData, isManager };
             setUser(normalized);

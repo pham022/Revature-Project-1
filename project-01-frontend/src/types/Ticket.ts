@@ -19,6 +19,8 @@ export interface UpdateTicketRequest {
     price?: number;
     description?: string;
     status?: TicketStatus; // for manager only
+    managerId?: number; // ID of manager making the decision (for history tracking)
+    comment?: string; // Comment from manager (for history tracking)
 }
 
 export interface TicketFormData {
@@ -27,3 +29,13 @@ export interface TicketFormData {
 }
 
 export type TicketStatus = 'PENDING' | 'APPROVED' | 'DENIED';
+
+export interface TicketStatusHistory {
+    id: number;
+    action: string;
+    employee: Employee;
+    manager?: Employee;
+    amount?: number;
+    comment?: string;
+    timestamp: string;
+}
