@@ -10,3 +10,4 @@ import java.util.List;
 public interface TicketStatusHistoryRepository extends JpaRepository<TicketStatusHistory, Long> {
     List<TicketStatusHistory> findByTicketIdOrderByTimestampAsc(Long ticketId);
 }
+
