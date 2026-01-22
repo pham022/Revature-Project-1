@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, ChangeEvent } from "react";
 import styles from './../Item.module.css';
 import EmployeeItem from "../EmployeeItem";
@@ -67,14 +66,6 @@ export default function Register() {
                 </div>
             </form>
         </div>
-=======
-import React from "react";
-
-export default function Register() {
-
-    return (
-        <div>Register</div>
->>>>>>> 2617b9cd5ebd58518689d855ea6eee2707362f40
     )
 
 }

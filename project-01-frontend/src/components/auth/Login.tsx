@@ -47,11 +47,7 @@ export default function Login() {
           <button className={styles.button} type='submit'>Log In</button>
         </div>
         <div className={styles.field}>
-<<<<<<< HEAD
           <Link to='/register'><center>Register a new Employee Account here</center></Link>
-=======
-          <Link to='/register'>Register an Account Here</Link>
->>>>>>> 2617b9cd5ebd58518689d855ea6eee2707362f40
         </div>
       </form>
     </div>
