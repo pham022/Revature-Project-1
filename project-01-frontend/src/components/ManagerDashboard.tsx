@@ -315,12 +315,6 @@ export default function ManagerDashboard() {
                                                     </button>
                                                 </>
                                             )}
-                                            <button 
-                                                className={styles.actionBtn}
-                                                onClick={() => ticketClickHandler(ticket.id)}
-                                            >
-                                                View
-                                            </button>
                                         </div>
                                     </td>
                                 </tr>
