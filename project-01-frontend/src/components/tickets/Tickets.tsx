@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Ticket } from '../../types/Ticket';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import base_url from "../../util/url";
 import styles from "./Tickets.module.css"
@@ -9,10 +9,13 @@ import { useAuth } from "../auth/useAuth";
 
 export default function Tickets() {
     const navigate = useNavigate();
+    const location = useLocation();
     const { user } = useAuth();
+    const hasShownSuccess = useRef(false);
 
     const [tickets, setTicket] = useState<Ticket[]>([])
     const [filter, setFilter] = useState<'all' | 'pending' | 'date'>('all')
+    const [showSuccess, setShowSuccess] = useState(false)
 
     useEffect(() => {
         axios.get(`${base_url}/tickets`)
@@ -25,8 +28,32 @@ export default function Tickets() {
             .catch(error => console.error(error));
     }, [user?.id])
 
+    useEffect(() => {
+        // Check if we came from a successful ticket submission
+        const state = location.state as { ticketSubmitted?: boolean } | null;
+        const searchParams = new URLSearchParams(location.search);
+        
+        if ((state?.ticketSubmitted || searchParams.get('success') === 'true') && !hasShownSuccess.current) {
+            setShowSuccess(true);
+            hasShownSuccess.current = true;
+            
+            // Clear the state and URL parameter immediately
+            navigate(location.pathname, { replace: true, state: {} });
+            
+            // Auto-hide after 3 seconds
+            const timer = setTimeout(() => {
+                setShowSuccess(false);
+            }, 3000);
+            return () => clearTimeout(timer);
+        } else if (!state?.ticketSubmitted && !searchParams.get('success')) {
+            // Reset the flag when there's no success state
+            hasShownSuccess.current = false;
+        }
+    }, [location, navigate])
+
     const ticketClickHandler = (id: number) => {
-        navigate(`/tickets/${id}`)
+        // Clear any success state when navigating away
+        navigate(`/tickets/${id}`, { state: {} });
     }
 
     const handleSubmitTicket = () => {
@@ -80,6 +107,12 @@ export default function Tickets() {
                     </button>
                 </div>
 
+                {/* Success Message */}
+                {showSuccess && (
+                    <div className={styles.successMessage}>
+                        Ticket submitted successfully!
+                    </div>
+                )}
 
                 {/* Table */}
                 <div className={styles.wrapper}>

@@ -69,7 +69,7 @@ export default function NewTicket() {
             };
 
             await axios.post(`${base_url}/tickets`, ticketData);
-            navigate('/employee');
+            navigate('/employee', { state: { ticketSubmitted: true } });
         } catch (err: any) {
             console.error('Error submitting ticket:', err);
             setError(err.response?.data?.message || 'Failed to submit ticket. Please try again.');
