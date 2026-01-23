@@ -80,6 +80,12 @@ export default function Tickets() {
                     </button>
                 </div>
 
+                 {/* Success Message */}
+                {showSuccess && (
+                    <div className={styles.successMessage}>
+                        Ticket submitted successfully!
+                    </div>
+                )}
 
                 {/* Table */}
                 <div className={styles.wrapper}>
