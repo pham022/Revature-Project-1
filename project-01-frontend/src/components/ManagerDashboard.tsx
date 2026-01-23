@@ -60,7 +60,8 @@ export default function ManagerDashboard() {
         try {
             const updateRequest: UpdateTicketRequest = {
                 status: 'APPROVED',
-                comment: comment.trim()
+                comment: comment.trim(),
+                managerId: user?.id
             };
             await axios.put(`${base_url}/tickets/${pendingAction.ticketId}`, updateRequest);
             setSuccessMessage('Ticket approved successfully!');

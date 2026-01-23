@@ -117,7 +117,7 @@ export default function Tickets() {
                                             className={styles.actionBtn}
                                             onClick={() => ticketClickHandler(ticket.id)}
                                         >
-                                            Edit
+                                            View
                                         </button>
                                     </td>
                                 </tr>
