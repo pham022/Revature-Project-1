@@ -182,6 +182,11 @@
   color: white;
 }
 
+.statusBadge.denied {
+  background-color: #ef4444;
+  color: white;
+}
+
 .statusBadge.rejected {
   background-color: #ef4444;
   color: white;
