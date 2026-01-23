@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Ticket } from '../../types/Ticket';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import base_url from "../../util/url";
 import styles from "./Tickets.module.css"
@@ -62,15 +62,15 @@ export default function Tickets() {
 
     const filteredTickets = () => {
         let filtered = [...tickets]
-        
+
         if (filter === 'pending') {
             filtered = filtered.filter(ticket => ticket.status === 'PENDING')
         } else if (filter === 'date') {
-            filtered = filtered.sort((a, b) => 
+            filtered = filtered.sort((a, b) =>
                 new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
             )
         }
-        
+
         return filtered
     }
 
@@ -83,19 +83,19 @@ export default function Tickets() {
                 {/* Filter Bar */}
                 <div className={styles.filterBar}>
                     <div className={styles.filters}>
-                        <button 
+                        <button
                             className={`${styles.filterBtn} ${filter === 'all' ? styles.active : styles.inactive}`}
                             onClick={() => setFilter('all')}
                         >
                             All Tickets
                         </button>
-                        <button 
+                        <button
                             className={`${styles.filterBtn} ${filter === 'pending' ? styles.active : styles.inactive}`}
                             onClick={() => setFilter('pending')}
                         >
                             Pending
                         </button>
-                        <button 
+                        <button
                             className={`${styles.filterBtn} ${filter === 'date' ? styles.active : styles.inactive}`}
                             onClick={() => setFilter('date')}
                         >
@@ -118,43 +118,43 @@ export default function Tickets() {
                 <div className={styles.wrapper}>
                     <table className={styles.table}>
                         <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Amount</th>
-                                <th>Description</th>
-                                <th>Status</th>
-                                <th>Created</th>
-                                <th>Actions</th>
-                            </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Amount</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {filteredTickets().map((ticket) => (
-                                <tr key={ticket.id}>
-                                    <td className={styles.idCell}>{ticket.id}</td>
-                                    <td className={styles.amountCell}>
-                                        ${ticket.price.toFixed(2)}
-                                    </td>
-                                    <td className={styles.descriptionCell}>
-                                        {ticket.description}
-                                    </td>
-                                    <td className={styles.statusCell}>
+                        {filteredTickets().map((ticket) => (
+                            <tr key={ticket.id}>
+                                <td className={styles.idCell}>{ticket.id}</td>
+                                <td className={styles.amountCell}>
+                                    ${ticket.price.toFixed(2)}
+                                </td>
+                                <td className={styles.descriptionCell}>
+                                    {ticket.description}
+                                </td>
+                                <td className={styles.statusCell}>
                                         <span className={`${styles.statusBadge} ${styles[ticket.status.toLowerCase()]}`}>
                                             {ticket.status}
                                         </span>
-                                    </td>
-                                    <td className={styles.createdAtCell}>
-                                        {new Date(ticket.createdAt).toLocaleDateString()}
-                                    </td>
-                                    <td className={styles.actionsCell}>
-                                        <button 
-                                            className={styles.actionBtn}
-                                            onClick={() => ticketClickHandler(ticket.id)}
-                                        >
-                                            View
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
+                                </td>
+                                <td className={styles.createdAtCell}>
+                                    {new Date(ticket.createdAt).toLocaleDateString()}
+                                </td>
+                                <td className={styles.actionsCell}>
+                                    <button
+                                        className={styles.actionBtn}
+                                        onClick={() => ticketClickHandler(ticket.id)}
+                                    >
+                                        View
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
                         </tbody>
                     </table>
                 </div>
