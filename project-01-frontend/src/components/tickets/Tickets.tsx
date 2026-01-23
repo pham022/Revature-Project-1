@@ -13,6 +13,7 @@ export default function Tickets() {
 
     const [tickets, setTicket] = useState<Ticket[]>([])
     const [filter, setFilter] = useState<'all' | 'pending' | 'date'>('all')
+    const [showSuccess, setShowSuccess] = useState(false)
 
     useEffect(() => {
         axios.get(`${base_url}/tickets`)
