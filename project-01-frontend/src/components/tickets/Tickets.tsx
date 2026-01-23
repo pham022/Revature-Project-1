@@ -1,6 +1,6 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Ticket } from '../../types/Ticket';
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import base_url from "../../util/url";
 import styles from "./Tickets.module.css"
@@ -32,14 +32,14 @@ export default function Tickets() {
         // Check if we came from a successful ticket submission
         const state = location.state as { ticketSubmitted?: boolean } | null;
         const searchParams = new URLSearchParams(location.search);
-        
+
         if ((state?.ticketSubmitted || searchParams.get('success') === 'true') && !hasShownSuccess.current) {
             setShowSuccess(true);
             hasShownSuccess.current = true;
-            
+
             // Clear the state and URL parameter immediately
             navigate(location.pathname, { replace: true, state: {} });
-            
+
             // Auto-hide after 3 seconds
             const timer = setTimeout(() => {
                 setShowSuccess(false);
