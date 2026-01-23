@@ -1,19 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { Ticket } from '../types/Ticket';
+import { Ticket, UpdateTicketRequest } from '../types/Ticket';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import base_url from "../util/url";
 import styles from "./tickets/Tickets.module.css";
-
-interface UpdateTicketRequest {
-    status?: 'PENDING' | 'APPROVED' | 'DENIED';
-    price?: number;
-    description?: string;
-    comment?: string;
-}
+import { useAuth } from "./auth/useAuth";
 
 export default function ManagerDashboard() {
     const navigate = useNavigate();
+    const { user } = useAuth();
 
     const [tickets, setTickets] = useState<Ticket[]>([]);
     const [filter, setFilter] = useState<'all' | 'pending' | 'approved' | 'denied'>('pending');
@@ -65,7 +60,8 @@ export default function ManagerDashboard() {
         try {
             const updateRequest: UpdateTicketRequest = {
                 status: 'APPROVED',
-                comment: comment.trim()
+                comment: comment.trim(),
+                managerId: user?.id
             };
             await axios.put(`${base_url}/tickets/${pendingAction.ticketId}`, updateRequest);
             setSuccessMessage('Ticket approved successfully!');
@@ -97,7 +93,8 @@ export default function ManagerDashboard() {
         try {
             const updateRequest: UpdateTicketRequest = {
                 status: 'DENIED',
-                comment: comment.trim()
+                comment: comment.trim(),
+                managerId: user?.id
             };
             await axios.put(`${base_url}/tickets/${pendingAction.ticketId}`, updateRequest);
             setSuccessMessage('Ticket denied successfully!');
@@ -317,9 +314,14 @@ export default function ManagerDashboard() {
                                             )}
                                             <button 
                                                 className={styles.actionBtn}
-                                                onClick={() => ticketClickHandler(ticket.id)}
+                                                onClick={() => navigate(`/tickets/${ticket.id}`)}
+                                                style={{
+                                                    backgroundColor: '#2563eb',
+                                                    color: 'white',
+                                                    borderColor: '#2563eb'
+                                                }}
                                             >
-                                                View
+                                                View History
                                             </button>
                                         </div>
                                     </td>

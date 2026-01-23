@@ -10,4 +10,6 @@ public class UpdateTicketRequest {
     private Double price;
     private String description;
     private TicketStatus status;
+    private Long managerId; // ID of manager making the decision (for history tracking)
+    private String comment; // Comment from manager (for history tracking)
 }

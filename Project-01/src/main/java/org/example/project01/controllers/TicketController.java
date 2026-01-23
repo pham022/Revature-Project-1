@@ -2,6 +2,7 @@ package org.example.project01.controllers;
 
 import org.example.project01.dto.CreateTicketRequest;
 import org.example.project01.dto.TicketDTO;
+import org.example.project01.dto.TicketHistory;
 import org.example.project01.dto.UpdateTicketRequest;
 import org.example.project01.entities.Ticket;
 import org.example.project01.services.TicketService;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -35,6 +37,14 @@ public class TicketController {
                 .map(TicketDTO::new)
                 .toList();
         return ResponseEntity.ok(responseDTOs);
+    }
+
+    @GetMapping("/{id}/history")
+    public ResponseEntity<List<TicketHistory>> getTicketHistory(@PathVariable Long id) throws InvalidTicketIdException {
+        List<TicketHistory> history = ticketService.getHistoryByTicketId(id).stream()
+                .map(TicketHistory::new)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(history);
     }
 
     @PostMapping
